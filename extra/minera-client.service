@@ -1,0 +1,12 @@
+[Service]
+ExecStart=/usr/bin/node /opt/minera-client/client.js
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=minera-client
+User=minera
+Group=minera
+Environment=MINERA_ID=zTkGRKl5DHq18NdT9jNyk/ujZAH7clk+K8r7ZAOj6Kk=
+
+[Install]
+WantedBy=multi-user.target
