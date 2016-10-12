@@ -1,0 +1,50 @@
+{
+  "name": "cloud-minera-client",
+  "version": "0.0.1-rc.1",
+  "description": "This is the official client software to connect your system/controller to the main Minera server and use it in https://app.getminera.com",
+  "main": "client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node client.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:getminera/client.git"
+  },
+  "author": "Michele Marcucci",
+  "license": "ISC",
+  "homepage": "https://app.getminera.com",
+  "dependencies": {
+    "async": "^2.0.1",
+    "cgminer": "https://github.com/getminera/node-cgminer/tarball/860a51f026cd9cdb57043ecd045e71e8cef5a794",
+    "chalk": "^1.1.3",
+    "console-stamp": "^0.2.0",
+    "crypto": "0.0.3",
+    "evilscan": "^1.0.2",
+    "ip": "^1.1.3",
+    "leveldown": "^1.5.0",
+    "linvodb3": "^3",
+    "lodash": "^4.11.1",
+    "macaddress": "^0.2.8",
+    "pidof": "^1.0.2",
+    "q": "^1.4.1",
+    "running": "0.0.1",
+    "socket.io-client": "^1.4.5",
+    "winston": "^2.2.0"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-bump": "^0.8.0",
+    "grunt-concurrent": "^2.3.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-env": "^0.4.4",
+    "grunt-file-append": "0.0.6",
+    "grunt-node-optimize": "^1.2.1",
+    "grunt-nodemon": "^0.4.2",
+    "load-grunt-tasks": "^3.5.0"
+  }
+}
