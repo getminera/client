@@ -1,6 +1,6 @@
 {
   "name": "cloud-minera-client",
-  "version": "0.0.1-rc.1",
+  "version": "0.0.1",
   "description": "This is the official client software to connect your system/controller to the main Minera server and use it in https://app.getminera.com",
   "main": "client.js",
   "scripts": {
