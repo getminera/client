@@ -2,6 +2,12 @@
 red=`tput setaf 1`
 green=`tput setaf 2`
 reset=`tput sgr0`
+INIT="notfound"
+
+[[ `/sbin/init --version` =~ upstart ]] && INIT="upstart" || INIT=INIT
+[[ `systemctl` =~ -\.mount ]] && INIT="systemd" || INIT=INIT
+
+echo $INIT
 
 echo -e "-----\n${green}START Minera Install script${reset}\n-----\n"
 
@@ -43,6 +49,7 @@ echo -e "-----\n${green}Installing Node.js modules${reset}\n-----\n"
 cd $MINERA_DIR
 sudo su minera -c "source /home/minera/.nvm/nvm.sh; npm install --production"
 
+if [ "$INIT" == "systemd" ]; then
 echo -e "-----\n${green}Adding Systemd startup script${reset}\n-----\n"
 cat > /tmp/minera-client.service <<EOL
 [Service]
@@ -65,7 +72,17 @@ sudo systemctl daemon-reload
 sudo systemctl restart minera-client
 
 if [ "$MINERA_ID" == "zTkGRKl5DHq18NdT9jNyk/ujZAH7clk+K8r7ZAOj6Kk=" ]; then
-	echo -e "${red}ATTENTION${reset} You did not add your ${red}MINERA_ID${reset}\nYou absolutely need to change it in\n    ${green}/etc/systemd/system/minera-client.service${reset}\nand restart the service with\n    ${green}sudo systemctl restart minera-client${reset}"
+    echo -e "${red}ATTENTION${reset} You did not add your ${red}MINERA_ID${reset}\nYou absolutely need to change it in\n    ${green}/etc/systemd/system/minera-client.service${reset}\nand restart the service with\n    ${green}sudo systemctl restart minera-client${reset}"
+fi
+fi
+
+if [ "$INIT" == "upstart" ]; then
+    echo "IS UPSTART"
+fi
+
+if [ "$INIT" == "notfound" ]; then
+    echo "IS NOTOFUND"
 fi
 
 echo -e "\n-----\n${green}All DONE. Check your system on https://app.getminera.com${reset}\n-----\n"
+
