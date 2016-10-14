@@ -1,11 +1,11 @@
 [Service]
-ExecStart=/usr/bin/node /opt/minera-client/client.js
+ExecStart=/bin/sh -c '/usr/bin/node /opt/minera-client/client.js 2>&1 >> /opt/minera-client/client.log'
 Restart=always
-StandardOutput=syslog
-StandardError=syslog
 SyslogIdentifier=minera-client
 User=minera
 Group=minera
+
+# CHANGE THIS!!! #
 Environment=MINERA_ID=zTkGRKl5DHq18NdT9jNyk/ujZAH7clk+K8r7ZAOj6Kk=
 
 [Install]
