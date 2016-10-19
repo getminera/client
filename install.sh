@@ -53,6 +53,9 @@ sudo su minera -c "source /home/minera/.nvm/nvm.sh; npm install --production"
 if [ "$INIT" == "systemd" ]; then
   echo -e "\n-----\n${green}Adding Systemd startup script${reset}\n-----\n"
   cat > /tmp/minera-client.service <<-EOM
+  [Unit]
+  After=network.target
+  
   [Service]
   ExecStart=/bin/sh -c '/usr/bin/node $MINERA_DIR/client.js 2>&1 >> $MINERA_DIR/client.log'
   Restart=always
@@ -68,6 +71,7 @@ EOM
 
   echo -e "\n-----\n${green}Starting Minera Client${reset}\n-----\n"
   sudo systemctl daemon-reload
+  sudo systemctl enable minera-client
   sudo systemctl restart minera-client
 
   if [ "$MINERA_ID" == "zTkGRKl5DHq18NdT9jNyk/ujZAH7clk+K8r7ZAOj6Kk=" ]; then
