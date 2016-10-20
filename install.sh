@@ -12,7 +12,6 @@ echo $INIT
 echo -e "\n-----\n${green}START Minera Install script${reset}\n-----\n"
 
 echo -e "\n-----\n${green}Install extra packages${reset}\n-----\n"
-sudo apt-get update
 sudo apt-get install -y git
 
 NEW_UUID=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
@@ -42,8 +41,14 @@ NODE_PATH=`sudo su minera -c "source /home/minera/.nvm/nvm.sh; nvm which stable"
 sudo ln -s $NODE_PATH /usr/bin/node
 
 echo -e "\n-----\n${green}Cloning Minera Client${reset}\n-----\n"
-sudo mkdir $MINERA_DIR
-sudo git clone https://github.com/getminera/client $MINERA_DIR
+if [ ! -d "$MINERA_DIR/.git" ]; then
+  sudo mkdir $MINERA_DIR
+  sudo git clone https://github.com/getminera/client $MINERA_DIR
+else
+  cd $MINERA_DIR
+  sudo git fetch --all
+  sudo git reset --hard origin/master
+fi
 sudo chown -R minera:minera $MINERA_DIR
 
 echo -e "-----\n${green}Installing Node.js modules${reset}\n-----\n"
